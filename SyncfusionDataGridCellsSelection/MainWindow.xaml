@@ -1,0 +1,50 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SyncfusionDataGridCellsSelection"
+        xmlns:viewmodels="clr-namespace:SyncfusionDataGridCellsSelection.ViewModels"
+        xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" x:Class="SyncfusionDataGridCellsSelection.MainWindow"
+        xmlns:Behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        x:Name="GridSample">
+    <Window.DataContext>
+        <viewmodels:MainWindowViewModel/>
+    </Window.DataContext>
+    <Behaviors:Interaction.Triggers>
+        <Behaviors:EventTrigger 
+            EventName="Loaded"
+            SourceObject="{Binding ElementName=GridSample}">
+            <Behaviors:InvokeCommandAction 
+                Command="{Binding LoadDataCommand}"/>
+        </Behaviors:EventTrigger>
+    </Behaviors:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Syncfusion:SfDataGrid
+            Name="grid"
+            ItemsSource="{Binding People}"
+            SelectionUnit="Cell"
+            SelectionMode="Extended">
+            <Syncfusion:SfDataGrid.Columns>
+                <Syncfusion:GridTextColumn HeaderText="Id" MappingName="Id"/>
+                <Syncfusion:GridTextColumn HeaderText="Name" MappingName="Name"/>
+                <Syncfusion:GridTextColumn HeaderText="Surname" MappingName="Surname"/>
+                <Syncfusion:GridTextColumn HeaderText="Birthday" MappingName="Birthday"/>
+                <Syncfusion:GridTextColumn HeaderText="Age" MappingName="Age"/>
+                <Syncfusion:GridCheckBoxColumn HeaderText="Married" MappingName="Married"/>
+            </Syncfusion:SfDataGrid.Columns>
+        </Syncfusion:SfDataGrid>
+        <Button 
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="Select All"
+            Click="Button_Click">    
+        </Button>
+    </Grid>
+</Window>
